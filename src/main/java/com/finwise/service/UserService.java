@@ -1,6 +1,7 @@
 package com.finwise.service;
 
 
+import com.finwise.exception.UserNotFoundException;
 import com.finwise.model.User;
 import com.finwise.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class UserService {
     }
 
     public User getUserById(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
     }
 
     public User getUserByEmail(String email) {

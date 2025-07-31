@@ -1,6 +1,7 @@
 package com.finwise.service;
 
 
+import com.finwise.exception.TransactionNotFoundException;
 import com.finwise.model.Transaction;
 import com.finwise.model.User;
 import com.finwise.repository.TransactionRepository;
@@ -27,7 +28,11 @@ public class TransactionService {
     }
 
     public List<Transaction> getTransactionsByUser(Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         return transactionRepository.findByUserId(user.getId());
+    }
+
+    public Transaction getTransactionById(Long id) {
+        return transactionRepository.findById(id).orElseThrow(() -> new TransactionNotFoundException(id));
     }
 }
