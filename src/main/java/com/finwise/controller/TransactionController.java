@@ -27,4 +27,9 @@ public class TransactionController {
     public List<Transaction> getTransactionsByUser(@PathVariable Long userId) {
         return transactionService.getTransactionsByUser(userId);
     }
+
+    @GetMapping("/{id}")
+    public Transaction getTransactionById(@PathVariable Long id) {
+        return transactionService.getTransactionById(id);
+    }
 }

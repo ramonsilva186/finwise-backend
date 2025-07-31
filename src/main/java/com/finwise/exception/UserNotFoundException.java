@@ -2,11 +2,13 @@ package com.finwise.exception;
 
 public class UserNotFoundException extends RuntimeException{
 
-    public UserNotFoundException(String message) {
-        super(message);
+    public UserNotFoundException(String email) {
+        super("User not found with email: " + email);
     }
 
     public UserNotFoundException(Long id) {
         super("User not found with id: " + id);
     }
+
+
 }

@@ -2,6 +2,7 @@ package com.finwise.service;
 
 
 import com.finwise.exception.TransactionNotFoundException;
+import com.finwise.exception.UserNotFoundException;
 import com.finwise.model.Transaction;
 import com.finwise.model.User;
 import com.finwise.repository.TransactionRepository;
@@ -24,6 +25,9 @@ public class TransactionService {
     }
 
     public Transaction createTransaction(Transaction transaction) {
+        User user = userRepository.findById(transaction.getUser().getId())
+                .orElseThrow(() -> new UserNotFoundException(transaction.getUser().getId()));
+        transaction.setUser(user);
         return transactionRepository.save(transaction);
     }
 
